@@ -9,8 +9,6 @@ import selenium.webdriver.support.ui as ui
 import urllib2
 from bs4 import BeautifulSoup
 from collections import defaultdict
-from pdb import set_trace as st
-import threading
 import json
 
 # load your shit from a json file
@@ -74,13 +72,7 @@ def add_to_cart(driver, url, size):
 
     driver.find_element_by_id('buyingtools-add-to-cart-button').click()
     time.sleep(.5)
-    driver.get('https://secure-store.nike.com/us/checkout/html/cart.jsp?country=US&country=US&l=cart&site=nikestore&returnURL=http://store.nike.com/us/en_us/')
-
-
 def main():
-    # phantomjs is not usable since it does not handle alerts
-    # driver = webdriver.PhantomJS(
-        # '/Users/maximilian.roquemore/Desktop/ShoeBot/phantomjs-2.1.1-macosx/bin/phantomjs')
     firefox_profile = webdriver.FirefoxProfile()
     firefox_profile.set_preference('permissions.default.image', 2)
     firefox_profile.set_preference(
@@ -102,7 +94,6 @@ def main():
         raw_input("Shoe in checkout :)\nPress Enter to end ...")
 
     except Exception as e:
-        print e, "ERROR"
         traceback.print_exc()
     finally:
         driver.close()
